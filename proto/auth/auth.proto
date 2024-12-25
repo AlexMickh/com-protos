@@ -1,0 +1,49 @@
+syntax = "proto3";
+
+package auth;
+
+option go_package = "AlexMickh.auth.v1;authv1";
+
+service Auth {
+    rpc RegisterUser(RegisterUserRequest) returns (RegisterResponse);
+    rpc RegisterCompany(RegisterCompanyRequest) returns (RegisterResponse);
+    rpc LoginUser(LoginUserRequest) returns (LoginResponse);
+    rpc LoginCompany(LoginCompanyRequest) returns (LoginResponse);
+}
+
+message RegisterUserRequest {
+    string first_name = 1;
+    optional string last_name = 2;
+    string email = 3;
+    string password = 4;
+    string description = 5;
+    optional string image_url = 6;
+    repeated string skills = 7;
+}
+
+message RegisterCompanyRequest {
+    string name = 1;
+    string password = 2;
+    string description = 3;
+    optional string image_url = 4;
+    repeated string skills = 5;
+    double rating = 6;
+}
+
+message RegisterResponse { 
+    bool is_complete = 1; 
+}
+
+message LoginUserRequest {
+    string email = 1;
+    string password = 2;
+}
+
+message LoginCompanyRequest {
+    string name = 1;
+    string password = 2;
+}
+
+message LoginResponse { 
+    string token = 1; 
+}
